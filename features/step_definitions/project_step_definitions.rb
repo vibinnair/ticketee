@@ -1,3 +1,3 @@
-Given /^(?:|I) am on (.+)$/ do |page_name|
-	visit(page_name)
+Given /^I am on the homepage$/ do 
+	visit('/')
 end
