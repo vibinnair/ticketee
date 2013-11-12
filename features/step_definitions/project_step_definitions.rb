@@ -28,6 +28,6 @@ Then /^I should be on the project page for "TextMate 2"$/ do
 	project_path(project)
 end
 
-Then /^I should see "TextMate2 - Projects - Ticketee"$/ do
-	expect(page).to have_title("TextMate2 - Projects - Ticketee")
+Then /^I should see "TextMate 2 - Projects - Ticketee"$/ do
+	expect(page).to have_title("TextMate 2 - Projects - Ticketee")
 end

@@ -1,0 +1,17 @@
+Writing 
+  <title>
+    <% if content_for? (:title) %>
+      <%=yield(:title)%>
+    <% else %>
+      <%= "Ticketee" %>
+    <% end %>
+  </title>
+
+  generates a title as follows: "\n \t TextMate 2 - Projects - Ticketee \n"
+
+Temporarily solved this by 
+
+<title><% if content_for? (:title) %><%=yield(:title)%><% else %><%= "Ticketee" %><% end %></title>
+
+(Reffer http://stackoverflow.com/questions/17189996/how-to-avoid-newlines-being-added-by-haml-ruby-block-evaluation for some tips.)
+
