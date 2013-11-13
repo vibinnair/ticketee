@@ -33,5 +33,6 @@ And /^I should see title as "([^\"]*)"$/ do |title_text|
 end
 
 Given /^there is a project called "([^\"]*)"$/ do |project_name|
-	FactoryGirl.build(:project, name : project_name)
+	#(Ref: Making a factory : https://github.com/thoughtbot/factory_girl/wiki/Usage)
+	project = FactoryGirl.create(:project, name:project_name)
 end
