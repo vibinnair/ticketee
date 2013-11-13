@@ -2,32 +2,36 @@ Given /^I am on the homepage$/ do
 	visit('/')
 end
 
-When /^I follow "New Project"$/ do
-	click_link('New Project')
+When /^I follow "([^\"]*)"$/ do |link_text|
+	click_link(link_text)
 end
 
-When /^I fill in "Name" with "TextMate 2"$/ do
-	fill_in('Name', with:'TextMate 2') 
+When /^I fill in "([^\"]*)" with "([^\"]*)"$/ do |input_name, input_value|
+	fill_in(input_name, with:input_value) 
 end
 
-When /^I press "Create Project"$/ do
-	click_button "Create Project"
+When /^I press "([^\"]*)"$/ do |button_text|
+	click_button button_text
 end
 
-Then /^I should see "Project has been created."$/ do
-	expect(page).to have_content 'Project has been created.'
-end
-
-Then /^I should be on the project page for "TextMate 2"$/ do
+Then /^I should be on the project page for "([^\"]*)"$/ do |project_name|
 	# We use the exclamatory find_by_name! function as it throws an exception when the specific row 
 	# is not found in table. 	
 
 	# Rails creates dynamic find_by_* methods for searching, where * will be a columnname of the table
     # to which the Model corresponds.
-	project = Project.find_by_name!("TextMate 2")
+	project = Project.find_by_name!(project_name)
 	project_path(project)
 end
 
-Then /^I should see "TextMate 2 - Projects - Ticketee"$/ do
-	expect(page).to have_title("TextMate 2 - Projects - Ticketee")
+And /^I should see "([^\"]*)"$/ do |display_text|
+	expect(page).to have_content display_text
+end
+
+And /^I should see title as "([^\"]*)"$/ do |title_text|
+	expect(page).to have_title title_text
+end
+
+Given /^there is a project called "([^\"]*)"$/ do |name|
+	Factory(:project, :name => name)
 end

@@ -1,4 +1,7 @@
 <%= form_for(@project) do |f| %>
+	 <!-- This dynamic_form gem method shows the rails generated model errors at the position where it is placed. -->
+	 <%= f.error_messages %>
+	 
 	<p>
 		<%= f.label :name %>
 		<%= f.text_field :name %>
