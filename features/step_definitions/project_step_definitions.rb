@@ -32,6 +32,6 @@ And /^I should see title as "([^\"]*)"$/ do |title_text|
 	expect(page).to have_title title_text
 end
 
-Given /^there is a project called "([^\"]*)"$/ do |name|
-	Factory(:project, :name => name)
+Given /^there is a project called "([^\"]*)"$/ do |project_name|
+	FactoryGirl.build(:project, name : project_name)
 end
