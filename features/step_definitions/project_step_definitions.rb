@@ -28,6 +28,10 @@ And /^I should see "([^\"]*)"$/ do |display_text|
 	expect(page).to have_content display_text
 end
 
+And /^I should not see "([^\"]*)"$/ do |display_text|
+	expect(page).to have_no_content display_text
+end
+
 And /^I should see title as "([^\"]*)"$/ do |title_text|
 	expect(page).to have_title title_text
 end

@@ -36,4 +36,14 @@ class ProjectsController < ApplicationController
 			render :action => "edit"
 		end
 	end
+
+	def destroy
+		project = Project.find(params[:id])
+		project.destroy
+		flash[:notice] = "Project has been deleted"
+		redirect_to projects_path
+	end
 end
+
+
+# Question: When is id passed and when is the entire project passed in the params[]
