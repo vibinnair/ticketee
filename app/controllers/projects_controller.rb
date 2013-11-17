@@ -1,4 +1,13 @@
 class ProjectsController < ApplicationController
+	# By default before_filters are run\called before all the actions of project controller.
+	# However this can be controlled by using :only or :except options.
+	# :only can be used to mention actions before which the filter should be called.
+	# :except can be used to mention actions before which the filter should not be called.
+	before_filter :find_project, :only => [	:show,
+											:edit,
+											:update,
+											:destroy]
+
 	def index
 		@projects = Project.all
 	end
@@ -19,16 +28,21 @@ class ProjectsController < ApplicationController
 	end
 
 	def show
-		@project = Project.find(params[:id])
+		# commenting out as this line is being handelled by before_filter
+		# @project = Project.find(params[:id])
 	end
 
 	def edit
-		@project = Project.find(params[:id])
+		# commenting out as this line is being handelled by before_filter
+		# @project = Project.find(params[:id])
 	end
 
 	def update
-		@project = Project.new(params[:project])
-		if @project.update_attributes(params[:project])
+		# commenting out as this line is being handelled by before_filter
+		# @project = Project.find(params[:id])
+
+		# update the table records with whatever has changed in params[:project] 
+		if @project.update_attributes(params[:project])  
 			flash[:notice] = "Project has been updated."
 			redirect_to @project
 		else
@@ -38,11 +52,21 @@ class ProjectsController < ApplicationController
 	end
 
 	def destroy
-		project = Project.find(params[:id])
-		project.destroy
-		flash[:notice] = "Project has been deleted"
+		# commenting out as this line is being handelled by before_filter
+		# project = Project.find(params[:id])
+		@project.destroy
+		flash[:notice] = "Project has been deleted."
 		redirect_to projects_path
 	end
+
+	private   # As this method has private method before it, the controller cannot respond to this 
+			  #	method as an action. i.e nobody can call this method. 
+		def find_project
+			@project = Project.find(params[:id])
+			rescue ActiveRecord::RecordNotFound
+				flash[:alert] = "The project you were looking for could not be found."	 
+			redirect_to projects_path
+		end
 end
 
 
