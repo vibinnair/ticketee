@@ -21,6 +21,8 @@ Ticketee::Application.routes.draw do
   # new_project_path which will generate '/project' (relative url) and
   # new_project_url which will generate 'http://xyz.com/project' (absolute url)
 
-  resources :projects
+  resources :projects do
+  	resources :tickets
+  end
 
 end
