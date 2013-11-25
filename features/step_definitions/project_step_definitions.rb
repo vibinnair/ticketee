@@ -38,5 +38,25 @@ end
 
 Given /^there is a project called "([^\"]*)"$/ do |project_name|
 	#(Ref: Making a factory : https://github.com/thoughtbot/factory_girl/wiki/Usage)
-	project = FactoryGirl.create(:project, name:project_name)
+	@project = FactoryGirl.create(:project, name:project_name)
+end
+
+And /^that project has a ticket:$/ do |table|
+	# table.hashes returns array of hashes, where each hash contains one entire row of the table;
+	# Calling an each on table.hashes iterates through the array of hashes and gives one hash which - 
+	# represents one row in the table. We get it in attributes parameter and pass that directly to -
+	# the model for creation(i.e factpory to be more precise).  
+	table.hashes.each do |attributes| 
+		@project.tickets.create(attributes)
+	end
+end
+
+Then /^I should see "([^\"]*)" within "([^\"]*)"$/ do |display_text, selector|
+	# use within(selector) if you’re looking for content in a particular area.
+	# Ref: 
+	# http://learn.thoughtbot.com/test-driven-rails-resources/capybara.pdf
+	# 
+	within(selector) do
+		expect(page).to have_content(display_text) 
+	end	
 end
