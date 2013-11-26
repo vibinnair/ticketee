@@ -4,7 +4,8 @@ class TicketsController < ApplicationController
 
 	before_filter :find_ticket, :only => [	:show, 
 										  	:edit,
-											:update]
+											:update, 
+											:destroy]
 
 	def new
 		@ticket = @project.tickets.build
@@ -38,6 +39,12 @@ class TicketsController < ApplicationController
 		end
 	end
 
+	def destroy
+		@ticket.destroy()
+		flash[:notice] = "Ticket has been deleted."
+		redirect_to @project  # => same as calling redirect_to project_path(@project) i.e the show action.
+	end
+
 	private 
 	def find_project
 		@project = Project.find(params[:project_id])
@@ -47,3 +54,7 @@ class TicketsController < ApplicationController
 		@ticket = @project.tickets.find(params[:id])
 	end
 end
+
+
+# render if you want to maintain/retain the instance objects and display the page.
+# redirect if you do not want to maintain the object and display a fresh page(i.e without any current object information).
