@@ -1,4 +1,6 @@
 Ticketee::Application.routes.draw do
+  devise_for :users
+
   # When / is received the root route is called. 
   # We say that when root route is called we will point to ProjectController's Index action.
   # We use the "root" method to specify the root route
@@ -24,5 +26,4 @@ Ticketee::Application.routes.draw do
   resources :projects do
   	resources :tickets
   end
-
 end
