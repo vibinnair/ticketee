@@ -32,8 +32,9 @@ end
 group :test do
 	gem 'cucumber-rails', :require => false
 	gem 'capybara'
-	gem 'database_cleaner'
-	gem 'factory_girl_rails'
+	gem 'database_cleaner'         # for cleaning the database after every test run.
+	gem 'factory_girl_rails'       
+	gem 'email_spec'               # for testing devise email confrmation functionality
 end
 
 
